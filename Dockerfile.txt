@@ -1,0 +1,6 @@
+FROM openjdk:11
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+RUN javac RandomNumberGenerator.java
+CMD ["java", "RandomNumberGenerator"]
+
