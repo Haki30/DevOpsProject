@@ -1,0 +1,27 @@
+name: Publish Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and Push Docker Image
+        env:
+          DOCKER_USERNAME: ${{ secrets.Docker_Username }}
+          DOCKER_PASSWORD: ${{ secrets.Docker_Password }}
+        run: |
+          docker buildx create --use
+          docker login -u haki30 -p #Hoxha302002
+          docker buildx build --platform linux/amd64,linux/arm64 -t haki30/random-number-generator:latest .
+          docker push haki30/random-number-generator:latest
