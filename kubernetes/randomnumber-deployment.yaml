@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: randomnumber-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: randomnumber
+  template:
+    metadata:
+      labels:
+        app: randomnumber
+    spec:
+      containers:
+      - name: randomnumber-container
+        image: haki30/random-number-generator:latest
